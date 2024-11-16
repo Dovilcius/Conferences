@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ConferenceController;
 use App\Http\Controllers\ClientController;
+use App\Http\Middleware\CheckRole;
 
 Route::get('/', function () {
     return view('welcome');
@@ -14,15 +15,16 @@ Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('l
 Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
 
-    Route::get('/dashboard2', [ConferenceController::class, 'dashboardWorkerView'])->name('dashboard2');
-
-    Route::get('/dashboard3', function () {
+    Route::middleware([CheckRole::class . ':admin'])->get('/dashboard3', function () {
         return view('dashboard3');
     })->name('dashboard3');
+
+    Route::middleware([CheckRole::class . ':worker'])->get('/dashboard2', [ConferenceController::class, 'dashboardWorkerView'])->name('dashboard2');
+
+    Route::middleware([CheckRole::class . ':client'])->get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 
     Route::prefix('conferences')->name('conferences.')->group(function () {
         Route::get('/', [ConferenceController::class, 'index'])->name('index'); 
