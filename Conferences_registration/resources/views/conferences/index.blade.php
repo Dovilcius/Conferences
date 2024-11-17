@@ -2,13 +2,13 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Conferences') }}
+                {{ __('messages.conferences') }}
             </h2>
 
             <nav class="flex space-x-6">
-                <a href="{{ route('dashboard3') }}" class="menu-link">Add New</a>
-                <a href="{{ route('conferences.index') }}" class="menu-link">Conferences</a>
-                <a href="{{ route('contacts.index') }}" class="menu-link">Customers</a>
+                <a href="{{ route('dashboard3') }}" class="menu-link">{{ __('messages.add_new') }}</a>
+                <a href="{{ route('conferences.index') }}" class="menu-link">{{ __('messages.conferences') }}</a>
+                <a href="{{ route('contacts.index') }}" class="menu-link">{{ __('messages.customers') }}</a>
             </nav>
         </div>
     </x-slot>
@@ -21,7 +21,7 @@
         }
 
         .menu-link:hover {
-            color: #63b3ed;
+            color: green;
         }
 
         nav a {
@@ -31,9 +31,9 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg" style="border-radius: 0.5rem; box-shadow: 0 4px 30px green;">
                 <div class="p-6 text-gray-900">
-                    <h2 class="text-2xl mb-4">All Conferences</h2>
+                    <h2 class="text-2xl mb-4">{{ __('messages.all_conferences') }}</h2>
 
                     @if(session('success'))
                         <div class="alert alert-success mb-4 p-4 bg-green-100 text-green-700 rounded-md">
@@ -51,25 +51,25 @@
                         <thead>
                             <tr>
                                 <th class="px-6 py-3 border-b border-gray-200 bg-gray-100 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Name
+                                    {{ __('messages.name') }}
                                 </th>
                                 <th class="px-6 py-3 border-b border-gray-200 bg-gray-100 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Date
+                                    {{ __('messages.date') }}
                                 </th>
                                 <th class="px-6 py-3 border-b border-gray-200 bg-gray-100 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Time
+                                    {{ __('messages.time') }}
                                 </th>
                                 <th class="px-6 py-3 border-b border-gray-200 bg-gray-100 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Description
+                                    {{ __('messages.description') }}
                                 </th>
                                 <th class="px-6 py-3 border-b border-gray-200 bg-gray-100 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Address
+                                    {{ __('messages.address') }}
                                 </th>
                                 <th class="px-6 py-3 border-b border-gray-200 bg-gray-100 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Lecturers
+                                    {{ __('messages.lecturers') }}
                                 </th>
                                 <th class="px-6 py-3 border-b border-gray-200 bg-gray-100 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Actions
+                                    {{ __('messages.actions') }}
                                 </th>
                             </tr>
                         </thead>
@@ -96,12 +96,12 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                         <a href="{{ route('conferences.edit', $conference->id) }}" class="text-green-600 hover:text-green-800">
-                                            Edit
+                                            {{ __('messages.edit') }}
                                         </a>
                                         <form action="{{ route('conferences.destroy', $conference->id) }}" method="POST" class="inline-block">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="text-red-600 hover:text-red-800">Delete</button>
+                                            <button type="submit" class="text-red-600 hover:text-red-800">{{ __('messages.delete') }}</button>
                                         </form>
                                     </td>
                                 </tr>

@@ -4,27 +4,40 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Conferences</title>
+        <title>{{ __('messages.conferences') }}</title>
 
         <link href="{{ asset('css/welcome.css') }}" rel="stylesheet">
         
         <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            function updateTime() {
+                var currentDate = new Date();
+                var hours = currentDate.getHours().toString().padStart(2, '0');
+                var minutes = currentDate.getMinutes().toString().padStart(2, '0');
+                var seconds = currentDate.getSeconds().toString().padStart(2, '0');
+                var timeString = hours + ":" + minutes + ":" + seconds;
+
+                document.getElementById('time').textContent = timeString;
+            }
+
+            setInterval(updateTime, 1000);
+        </script>
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white">
 
         <header class="welcome-header">
             <div class="header-content">
-                <h1>Conferences</h1>
+                <h1>{{ __('messages.conferences') }}</h1>
 
                 @if (Route::has('login'))
                     <nav class="nav-links">
                         @auth
-                            <a href="{{ url('/dashboard') }}">Dashboard</a>
+                            <a href="{{ url('/dashboard') }}">{{ __('messages.dashboard') }}</a>
                         @else
-                            <a href="{{ route('login') }}">Log in</a>
+                            <a href="{{ route('login') }}">{{ __('messages.login') }}</a>
 
                             @if (Route::has('register'))
-                                <a href="{{ route('register') }}">Register</a>
+                                <a href="{{ route('register') }}">{{ __('messages.register') }}</a>
                             @endif
                         @endauth
                     </nav>
@@ -35,16 +48,20 @@
         <main class="welcome-main">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="welcome-table">
-                    <h2>Welcome to the Conference Platform</h2>
-                    <p>Our conferences provide an opportunity to learn about the latest trends, make new connections and participate in interactive sessions.</p>
-                    <p>Registering for the conference is easy!</p>
+                    <h2>{{ __('messages.welcome_to_conference_platform') }}</h2>
+                    <p>{{ __('messages.conference_description') }}</p>
+                    <p>{{ __('messages.easy_registration') }}</p>
                 </div>
             </div>
         </main>
 
         <footer class="welcome-footer">
-            Dovilė Viršilienė PIT-21-I-NT
+            {{ __('messages.footer') }}
         </footer>
+
+        <div class="flex justify-center items-center p-6 text-gray-900" style="border-radius: 0.5rem; box-shadow: 0 4px 30px green;">
+            <span id="time" style="color: green; font-size: 1.25rem; font-weight: 600;">Loading time...</span>
+        </div>
         
     </body>
 </html>

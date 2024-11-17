@@ -16,12 +16,12 @@ class ConferenceController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|max:255',
             'date' => 'required|date',
             'time' => 'required',
             'description' => 'required',
-            'address' => 'nullable|string',
-            'lecturers' => 'nullable|string',
+            'address' => 'required|string|max:255',
+            'lecturers' => 'required|string|max:255',
         ]);
 
         Conference::create($request->only(['name', 'date', 'time', 'description', 'address', 'lecturers']));

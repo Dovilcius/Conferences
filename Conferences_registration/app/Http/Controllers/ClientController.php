@@ -9,9 +9,11 @@ class ClientController extends Controller
 {
     public function index()
     {
-        $clients = User::where('role', 'client')->get();
+        $clients = User::where('role', 'client')->get(); 
+        $workers = User::where('role', 'worker')->get(); 
+        $admins = User::where('role', 'admin')->get();
         
-        return view('contacts.index', compact('clients'));
+        return view('contacts.index', compact('clients', 'workers', 'admins'));
     }
 
     public function edit($id)
