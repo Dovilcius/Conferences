@@ -69,7 +69,6 @@ return [
     'register' => 'Register',
     'dashboard' => 'Dashboard',
     'welcome_to_conference_platform' => 'Welcome to the Conference Platform',
-    'conference_description' => 'On this site you will find conferences on a wide range of topics, from technology, business, education to creative and social innovation. Our goal is to help you easily and conveniently find, choose and register for events that interest you.',
     'easy_registration' => 'Register now and achieve your goals with us!',
     'footer' => 'Dovilė Viršilienė PIT-21-I-NT',
 ];
