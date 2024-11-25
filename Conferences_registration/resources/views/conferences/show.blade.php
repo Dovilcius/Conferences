@@ -32,12 +32,16 @@
                                 <span class="text-gray-500 mt-4">{{ __('messages.cannot_unregister') }}</span>
                             @endif
                         @else
-                            <form action="{{ route('conferences.register', $conference->id) }}" method="POST">
-                                @csrf
-                                <button type="submit" style="background-color: #48bb78; color: white; padding: 0.5rem 1rem; border-radius: 0.375rem;">
-                                    {{ __('messages.register') }}
-                                </button>
-                            </form>
+                            @if($conference->date >= now()->toDateString())
+                                <form action="{{ route('conferences.register', $conference->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" style="background-color: #48bb78; color: white; padding: 0.5rem 1rem; border-radius: 0.375rem;">
+                                        {{ __('messages.register') }}
+                                    </button>
+                                </form>
+                            @else
+                                <span class="text-red-500">Registration is closed.</span>
+                            @endif
                         @endif
                     </div>
 
