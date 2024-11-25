@@ -71,4 +71,5 @@ return [
     'welcome_to_conference_platform' => 'Welcome to the Conference Platform',
     'easy_registration' => 'Register now and achieve your goals with us!',
     'footer' => 'Dovilė Viršilienė PIT-21-I-NT',
+    'registration_closed' => 'Registration is closed for this conference.',
 ];
