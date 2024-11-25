@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header" style="background-color: black; padding-top: 20px;">
-            <h2 style="color: green; font-size: 1.25rem; font-weight: 600;" class="font-semibold text-xl">
+        <h2 style="color: green; font-size: 1.25rem; font-weight: 600;" class="font-semibold text-xl">
             {{ __('messages.welcome') }}
         </h2>
     </x-slot>
@@ -51,6 +51,8 @@
                                         <div class="mt-2">
                                             @if(auth()->user()->conferences->contains($conference->id))
                                                 <span class="text-gray-500">{{ __('messages.already_registered') }}</span>
+                                            @elseif($conference->date < now()->toDateString())
+                                                <span class="text-gray-500">{{ __('messages.registration_closed') }}</span>
                                             @else
                                                 <form action="{{ route('conferences.register', $conference->id) }}" method="POST" class="inline">
                                                     @csrf

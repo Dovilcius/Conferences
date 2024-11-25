@@ -78,13 +78,20 @@ class ConferenceController extends Controller
         $conference = Conference::findOrFail($conferenceId);
         $user = auth()->user();
 
-        if ($conference->participants->contains($user->id)) {
-            return redirect()->route('dashboard')->with('error', 'Jūs jau esate užsiregistravęs į šią konferenciją.');
+        // Check if the conference date has already passed
+        if ($conference->date < now()->toDateString()) {
+            return redirect()->route('dashboard')->with('error', 'You cannot register for a past conference.');
         }
 
+        // Check if the user is already registered
+        if ($conference->participants->contains($user->id)) {
+            return redirect()->route('dashboard')->with('error', 'You are already registered for this conference.');
+        }
+
+        // Register the user
         $conference->participants()->attach($user->id);
 
-        return redirect()->route('dashboard')->with('success', 'Sėkmingai užsiregistravote į konferenciją.');
+        return redirect()->route('dashboard')->with('success', 'Successfully registered for the conference.');
     }
 
     public function unregisterForConference($conferenceId)
@@ -95,13 +102,13 @@ class ConferenceController extends Controller
         if ($conference->participants->contains($user->id)) {
             if (now()->diffInDays($conference->date) > 1) {
                 $conference->participants()->detach($user->id);
-                return redirect()->route('dashboard')->with('success', 'Sėkmingai išsiregistravote iš konferencijos.');
+                return redirect()->route('dashboard')->with('success', 'Successfully unregistered from the conference.');
             } else {
-                return redirect()->route('conferences.show', $conferenceId)->with('error', 'Negalite išsiregistruoti mažiau nei likus 24 valandoms iki konferencijos.');
+                return redirect()->route('conferences.show', $conferenceId)->with('error', 'You cannot unregister less than 24 hours before the conference.');
             }
         }
 
-        return redirect()->route('dashboard')->with('error', 'Jūs nesate užsiregistravęs į šią konferenciją.');
+        return redirect()->route('dashboard')->with('error', 'You are not registered for this conference.');
     }
 
     public function inform($conferenceId)

@@ -49,7 +49,6 @@
             <div class="max-w-7xl mx-auto px-6">
                 <div class="welcome-table">
                     <h2>{{ __('messages.welcome_to_conference_platform') }}</h2>
-                    <p>{{ __('messages.conference_description') }}</p>
                     <p>{{ __('messages.easy_registration') }}</p>
                 </div>
             </div>
